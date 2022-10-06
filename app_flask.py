@@ -1,5 +1,4 @@
 import json
-import pickle
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 
@@ -40,6 +39,11 @@ def schedule():
     str_return_data = json.dumps(return_data)
     return str_return_data
     # return f"{teacher} {str(week)}"
+
+@app.route("/dron/<int:id>", methods=['get'])
+def dron(id):
+    return f"Руслан не съел {id} ёжиков"
+
 
 
 @app.route("/api/teachers", methods=['get'])
