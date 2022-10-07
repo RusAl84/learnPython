@@ -7,13 +7,16 @@ CORS(app)
 global df
 df = ""
 
+
 @app.route('/')
 def dafault_route():
     return 'Test server'
 
-@app.route('/nastya')
+
+@app.route('/elena')
 def nastya_route():
-    return 'nastya server'
+
+    return 'Elena TOP'
 
 
 @app.route("/api/schedule", methods=['POST'])
@@ -40,10 +43,10 @@ def schedule():
     return str_return_data
     # return f"{teacher} {str(week)}"
 
+
 @app.route("/dron/<int:id>", methods=['get'])
 def dron(id):
-    return f"Руслан не съел {id} ёжиков"
-
+    return f"Артём не съел {id} ёжиков"
 
 
 @app.route("/api/teachers", methods=['get'])
