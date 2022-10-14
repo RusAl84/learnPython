@@ -9,7 +9,7 @@ for i in range(10):
     line.append(f"Возраст {random.randint(1, 5)}")
     users.append(line)
 
-# print(users)
+print(users)
 
 with open("data.csv", "w", newline="", encoding="UTF8") as file:
     writer = csv.writer(file)
