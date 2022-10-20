@@ -24,7 +24,7 @@ class Person:
         if self.health >= 0:
             return True
         else:
-            print(f"{self.name} GaveOver")
+            print(f"{self.name} Game Over")
             return False
 
 
@@ -36,3 +36,10 @@ while Mihalich.isLive() and Daniel.isLive():
     Daniel.display()
     Daniel.attack(Mihalich)
     Mihalich.attack(Daniel)
+
+import winsound
+frequency = 2000  # Set Frequency To 2500 Hertz
+duration = 1000  # Set Duration To 1000 ms == 1 second
+for i in range(30):
+    winsound.Beep(frequency+i*50, duration-30*i)
+winsound.Beep(frequency, 10000)
