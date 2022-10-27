@@ -1,6 +1,6 @@
 import time
 import winsound
-
+import decimal
 
 class Sounds:
 
@@ -327,7 +327,9 @@ class Boss(Unit):
         self.sound = Sounds()
 
     def __str__(self):
+
         return f"БОС: {self.name} [{self.health}]"
+
 
 if __name__ == "__main__":
     mihalich = Unit("МИХАЛЫЧ", 100)
