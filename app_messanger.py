@@ -6,16 +6,19 @@ CORS(app)
 
 ListOfMessages = []
 
+
 @app.route('/')
 def dafault_route():
     return 'Messenger Flask server is running! ' \
-        '<br> <a href="/status">Check status</a>'
+           '<br> <a href="/status">Check status</a>'
+
 
 @app.route('/status')
 def status():
     return {
         'messages_count': len(ListOfMessages)
     }
+
 
 # отправка сообщений
 @app.route("/api/Messanger", methods=['POST'])
@@ -27,7 +30,19 @@ def SendMessage():
     print(msg)
     msgtext = f"{msg['UserName']} <{msg['TimeStamp']}>: {msg['MessageText']}"
     print(f"Всего сообщений: {len(ListOfMessages)} Посланное сообщение: {msgtext}")
-    return f"Сообщение отослано успшно. Всего сообщений: {len(ListOfMessages)} ", 200
+    return f"Сообщение отослано успешно. Всего сообщений: {len(ListOfMessages)} ", 200
+
+
+# отправка сообщений
+@app.route("/reverse", methods=['POST'])
+def reverse():
+    text = request.json
+    print(text)
+    text = str(text["text"])
+    reverseText = ""
+    for i in range(1, len(text) + 1):
+        reverseText += text[-1 * i]
+    return f"{reverseText}", 200
 
 
 # получение сообщений
