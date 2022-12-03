@@ -4,7 +4,6 @@ import json
 
 def get_quotes():
     # https://1gai.ru/publ/525009-116-vdohnovljajuschih-citat-samyh-izvestnyh-ljudej-mira.html
-
     quotes = []
     quotes.append(
         "«Если человека всё устраивает, то он полный идиот. Здорового человека, в нормальной памяти не может всегда и всё устраивать». — Владимир Путин (О своем отношении к правительству в интервью 24 декабря 2000 г.)")

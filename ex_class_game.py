@@ -332,8 +332,11 @@ class Boss(Unit):
 
 
 if __name__ == "__main__":
+
+    sound = Sounds()
+    sound.playSound()
     mihalich = Unit("МИХАЛЫЧ", 100)
-    kiruha = Unit("КИРЮХА", 100)
+    kiruha = Unit("ЕВГЕН", 100)
     boss = Boss("ЕГЭ")
 
     while mihalich.isLive() and kiruha.isLive() and boss.isLive():
