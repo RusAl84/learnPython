@@ -45,5 +45,5 @@ def task1read():
         print(f"{item['nickname']} <{item['timeStamp']}> : {item['text']}")
 
 if __name__ == "__main__":
-    # task1write()
-    task1read()
+    task1write()
+    # task1read()

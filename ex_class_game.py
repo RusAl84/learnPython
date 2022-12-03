@@ -1,6 +1,6 @@
 import time
 import winsound
-import decimal
+
 
 class Sounds:
 
@@ -301,7 +301,7 @@ class Unit:
         # self.sound.attack()
 
     def display(self):
-        print(f"Игрок: {self.name} [{self.health}]")
+        print(self.__str__)
 
     def __str__(self):
         return f"Игрок: {self.name} [{self.health}]"
@@ -327,7 +327,6 @@ class Boss(Unit):
         self.sound = Sounds()
 
     def __str__(self):
-
         return f"БОС: {self.name} [{self.health}]"
 
 
@@ -353,4 +352,4 @@ if __name__ == "__main__":
         elif r == 3:
             boss.attack(mihalich)
         elif r == 4:
-            boss.attack(kiruha)
+            boss.attack(kirexuha)
