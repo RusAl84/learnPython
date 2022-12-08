@@ -352,4 +352,4 @@ if __name__ == "__main__":
         elif r == 3:
             boss.attack(mihalich)
         elif r == 4:
-            boss.attack(kirexuha)
+            boss.attack(kiruha)
