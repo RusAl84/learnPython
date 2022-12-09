@@ -2,7 +2,6 @@
 import random
 
 """
-start
 Datatype examples;
 Working with strings without control flow;
 """
@@ -20,7 +19,7 @@ def syntax_example():
     print("Конец")
 
 
-def open_file(filename="./f1.txt"):
+def open_file(filename="D:/sources/learnPython1/learnPython/DevOps/f1.txt"):
     print("Чтение файла", filename)
     with open(filename, "rt", encoding="utf-8") as f:
         return f.read()
@@ -37,7 +36,9 @@ def comments_exmaple():
     a = 10
     b = 5
     # Строки и регэкспы с эсплайн также используют тройные кавычки.
+    s1 = "I""m"
     s = """I'm a string with weird formating, "and no need to escape tickles" 'neither dobule nor single'"""
+    print(s1)
     print(s)
     s1 = "I " "help" " hedgehog"
     print(s1)
@@ -112,7 +113,8 @@ def comparesments():
         )
         print(f"\n\t{999 > None}")
     except TypeError as exc:
-        print(f"Питон падал с ошибкой {exc}\n При попытке вывести:\n 999 > None")
+        print(
+            f"Питон падал с ошибкой {exc}\n При попытке вывести:\n 999 > None")
     a = 32
     print(f"Сравнивать лучше так a is None\t{ a is None }")
 
@@ -138,10 +140,10 @@ def math_exists():
     l = dir(math)
     for idx in range(len(l)):
         if idx % 7 == 0:
-            print(l[idx - 7 : idx])
+            print(l[idx - 7: idx])
 
 
-#############################################STRINGS###################################################################
+############################################# STRINGS###################################################################
 
 
 def define_strs():
@@ -171,7 +173,8 @@ def strings_as_l_of_chars():
     print(f"{str1}\n{str2}")
     print(f"Третий символ строк: {str1[2]}, {str2[2]}")
     print(f"Предпоследний символ строк: {str1[-2]}, {str2[-2]}")
-    print(f"Символы с [4 по 5) начала включаем, конец нет : {str1[3:5]}, {str2[3:5]}")
+    print(
+        f"Символы с [4 по 5) начала включаем, конец нет : {str1[3:5]}, {str2[3:5]}")
     print(f"Символы с [3:] {str1[3:]}, {str2[3:]} ")
     print(f"Символы до [3:] {str1[:3]}, {str2[:3]} ")
     print("Можно вычислять в процессе...")
@@ -187,7 +190,7 @@ def join_example():
     vlans = ["100", "168", "255", "196"]
     print(",".join(vlans))
     s = " ".join(dir(str))
-    print(s[s.find("join") :])
+    print(s[s.find("join"):])
     l = [str(i) for i in range(11)]
     s1 = " ".join(l)
     l2 = s1.split()
@@ -253,25 +256,26 @@ def format_with_format(amount=10):
     {}"""
     print(ip_tmpl.format("196.168.100.234"))
     for i in range(amount):
-        print(ip_tmpl.format(".".join([str(random.randint(0, 255)) for x in range(4)])))
+        print(ip_tmpl.format(
+            ".".join([str(random.randint(0, 255)) for x in range(4)])))
+
 
 def more_format():
     import math
     print("To binary: {:b} {:b} {:b} {:b}".format(192, 100, 1, 1))
     print("С заданой точностью: {:.3f}".format(math.pi))
     print("Именовано ip/mask: {ip}/{mask}".format(mask=24, ip='10.0.0.1'))
-    print(f"Формат строками {math.pi:.3f} Единственный минус в том что вы совмещаете логику и шаблон {2 + 3} это не очень ООПшно")
-
-
+    print(
+        f"Формат строками {math.pi:.3f} Единственный минус в том что вы совмещаете логику и шаблон {2 + 3} это не очень ООПшно")
 
 
 if __name__ == "__main__":
     # не правильный комментарий (incorrect comment)
-    # syntax_example() # correct comment
+    # syntax_example()  # correct comment
     # print(open_file())
     # comments_exmaple()
-    # dir_help_example()
-    # vars_example()
+    #dir_help_example()
+    #vars_example()
     """Все учебники по питону, утверждают, что при достаточно больших примитивах ссылки будут разные.
     У меня ссылки одинаковые, хотя объекты не зависимые. Так что не знаю, стоит ли это вообще показывать."""
     # links_to_same_primiteve(43534323423342)
@@ -288,4 +292,4 @@ if __name__ == "__main__":
     # find_like_str_methods()
     # methods_for_ppl_who_cant_import_re()
     # format_with_format()
-    more_format()
+    # more_format()
