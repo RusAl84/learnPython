@@ -2,6 +2,7 @@
 import random
 
 """
+start
 Datatype examples;
 Working with strings without control flow;
 """
