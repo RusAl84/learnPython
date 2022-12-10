@@ -308,9 +308,9 @@ def dict_fetch():
 
 
 if __name__ == "__main__":
-    cfg = Config("10:49")
+    # cfg = Config("10:43")
     # cfg.print_status_time()
-    # simple_if(7)
+    # simple_if(9)
     # casts_to_boolean()
     # if_in_ex()
     # pseudo_pass_check()
