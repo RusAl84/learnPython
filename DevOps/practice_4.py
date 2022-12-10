@@ -163,6 +163,7 @@ class DuckDeveloper(Duck, Developer):
 
 
 if __name__ == "__main__":
+    
     # Everything is an Object, one more time with feeling
     # print_details(a=1)
     # print_details(a="Hello world!")

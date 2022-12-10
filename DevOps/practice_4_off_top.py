@@ -3,7 +3,6 @@ import winsound
 
 
 class Sounds:
-
     def playSound(self):
         def Beep(frequency, duration):
             winsound.Beep(frequency, duration)
@@ -292,7 +291,6 @@ class Sounds:
 
 
 class Unit:
-
     def __init__(self, name, health):
         self.name = name
         self.health = health
@@ -308,6 +306,7 @@ class Unit:
 
     def attack(self, attackUnit):
         import random
+
         self.health = self.health - attackUnit.demange - random.randint(-7, 7)
         self.sound.attack()
 
@@ -344,6 +343,7 @@ if __name__ == "__main__":
         print(kiruha)
 
         import random
+
         r = random.randint(1, 4)
         if r == 1:
             kiruha.attack(boss)

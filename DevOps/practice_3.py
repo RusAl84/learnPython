@@ -5,7 +5,7 @@ from functools import wraps
 
 
 def square(x):
-    return x, x**2
+    return (x, x**2)
 
 
 def sum_of_3(a, b, c=0):
@@ -124,8 +124,7 @@ def hello():
 
 
 def timer(func):
-    print("timer")
-
+    # print("timer")
     @wraps(func)
     def wrapper(*args, **kwargs):
         start_ts = time.time()
@@ -133,22 +132,18 @@ def timer(func):
         end_ts = time.time()
         print(f"Time of {func.__name__} is {end_ts - start_ts} seconds")
         return res
-
     return wrapper
 
 
 def sleeper(delay_sec=0.5, fake=True):
     def _sleeper(func):
-        print("sleeper")
-
+        # print("sleeper")
         def wrapper(*args, **kwargs):
             res = func(*args, **kwargs)
             print(f"sleeper make us sleep {delay_sec}")
             time.sleep(delay_sec)
             return res
-
         return wrapper
-
     return _sleeper
 
 
@@ -229,8 +224,9 @@ def make_function(name, *args, kw=42, **kwargs):
 
 
 if __name__ == "__main__":
-    cfg = Config("00:00")
-    # print(square(10))
+    # cfg = Config("00:00")
+    # cfg.print_status_time()
+    # print(square(12))
     # print(sum_of_3(2,2))
     # print(sum_of_3(2, 2, 77))
     # sum_of_any(1,2,3,4,5,6,7,8,9)
@@ -268,16 +264,16 @@ if __name__ == "__main__":
     # print(f"Total: {end_ts - start_ts} seconds")
 
     # Fn mapping if time allows
-    # print(do_what_i_say("Умножь a=20 на b=5"))
-    # print(do_what_i_say("Дели a=7 на b=2"))
-    # print(do_what_i_say("Порядок a=2 b=10 не имеет значения плюс"))    
+    print(do_what_i_say("Умножь a=20 на b=5"))
+    print(do_what_i_say("Дели a=7 на b=2"))
+    print(do_what_i_say("Порядок a=2 b=10 не имеет значения плюс"))    
     print(do_what_i_say("Порядок a=2 b=10 с=598 не имеет значения плюс1"))
 
     # How this magic works
-    # fn = make_function("", 54, aim="term")
+    fn = make_function("", 54, aim="term")
     # fn()
     # fn()
-    # print(f"Name: {fn.__name__}\nDocstring: {fn.__doc__}\nDefaults:{fn.__defaults__}")
-    # print(f"Closure: {fn.__closure__}")
-    # print(f"Lets peek inside of this links: {fn.__closure__[0].cell_contents}")
-    # print(f"Lets peek inside of this links: {fn.__closure__[1].cell_contents}")
+    print(f"Name: {fn.__name__}\nDocstring: {fn.__doc__}\nDefaults:{fn.__defaults__}")
+    print(f"Closure: {fn.__closure__}")
+    print(f"Lets peek inside of this links: {fn.__closure__[0].cell_contents}")
+    print(f"Lets peek inside of this links: {fn.__closure__[1].cell_contents}")
