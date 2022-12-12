@@ -12,6 +12,7 @@ import zlib
 import gzip
 import binascii
 import pickle
+import json
 
 
 COPY_PATH = "./DevOps/output/f1.txt"
@@ -383,14 +384,14 @@ def encode_custom_object(obj):
 
 
 if __name__ == "__main__":
-    # print("Files")
+    print("Files")
     # contextless_open()
     # os_path_methods(fpath=fpath)
     # with_open(fpath)
     # simple_text_file_operations()
     # list_dir()
     # globing("./devops/pr*")
-    # globing("./.venv/Scripts/*.exe")
+
 
     # small_files_routine()
     # С большими файлами так не прокатит:
@@ -418,12 +419,12 @@ if __name__ == "__main__":
     # for i in range(10):
     #     line = next(gen)
     #     print(f"{i}:\t{line}")
-    # # Добираем остаток
+    # # # Добираем остаток
     # for line in gen:
     #     print(line)
 
     # bonus1 unix style glob + re = super grep
     # За регэкспы объяснять отдельно. И это одна из тех штук где бесполезно объяснять можно токо взять.
-    # unix_style_file_operations('./devops/*',r"^[ ]*(?P<import>(import |from ))(?P<package>[\w. ]*)", print)
+    unix_style_file_operations('./devops/*',r"^[ ]*(?P<import>(import |from ))(?P<package>[\w. ]*)", print)
 
-    ex_pandas()
+    # ex_pandas()
