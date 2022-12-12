@@ -149,30 +149,36 @@ def file_handler_methods(fpath=fpath, cp_path=COPY_PATH):
     print(f"Указатель переместился на {fh.tell()} позицию")
     fh.readline()
     print(f"Указатель переместился на {fh.tell()} позицию")
-    print(f"Файловый дескриптор,инт.Если улетел во много, вы где-то не закрыли контекст/файл: {fh.fileno()}")
+    print(
+        f"Файловый дескриптор,инт.Если улетел во много, вы где-то не закрыли контекст/файл: {fh.fileno()}"
+    )
     print(f"{fh.seekable()}")
+
 
 ######################################Archives#workflow#################################################################
 def compresson101():
-    data = 'Hello. I am Dmitri Karamazov and the world is my father'
+    data = "Hello. I am Dmitri Karamazov and the world is my father"
     lst = string.ascii_letters
     hard_to_compress = "".join(random.choice(lst) for _ in range(256))
 
     compressed_data = zlib.compress(data.encode(), 2)
-    print(f'Original data: {data}')
-    print(f'Compressed data: {binascii.hexlify(compressed_data)}')
+    print(f"Original data: {data}")
+    print(f"Compressed data: {binascii.hexlify(compressed_data)}")
     compressed_data = zlib.compress(hard_to_compress.encode(), 2)
-    print(f'Random sequence: {hard_to_compress}')
-    print(f'Compressed data: {binascii.hexlify(compressed_data)}')
+    print(f"Random sequence: {hard_to_compress}")
+    print(f"Compressed data: {binascii.hexlify(compressed_data)}")
+
 
 def figure_out_compression_ratio(fpath=fpath, lvl=None):
     if not lvl:
         lvl = zlib.Z_BEST_COMPRESSION
-    original_data = open(fpath, 'rb').read()
+    original_data = open(fpath, "rb").read()
     compressed_data = zlib.compress(original_data, lvl)
 
-    compress_ratio = (float(len(original_data)) - float(len(compressed_data))) / float(len(original_data))
-    print('Compressed: %d%%' % (100.0 * compress_ratio))
+    compress_ratio = (float(len(original_data)) - float(len(compressed_data))) / float(
+        len(original_data)
+    )
+    print("Compressed: %d%%" % (100.0 * compress_ratio))
 
 
 def extract_2_file(src_path=fpath, target_path="./output"):
@@ -180,18 +186,18 @@ def extract_2_file(src_path=fpath, target_path="./output"):
         raise FileNotFoundError(f"Expected archive file at {src_path}")
     if os.path.isdir(target_path):
         src_name = os.path.basename(src_path)
-        if src_name.find('.gz')!=-1:
-            src_name=src_name[:src_name.find('.gz')]
-        target_path=target_path+os.sep+src_name
-    with gzip.open(src_path, 'rb') as f_in:
-        with open(target_path, 'wb') as f_out:
+        if src_name.find(".gz") != -1:
+            src_name = src_name[: src_name.find(".gz")]
+        target_path = target_path + os.sep + src_name
+    with gzip.open(src_path, "rb") as f_in:
+        with open(target_path, "wb") as f_out:
             shutil.copyfileobj(f_in, f_out)
 
 
-#what's inside...
-def decompress_with_chunks(fpath, CHUNKSIZE = 1024):
+# what's inside...
+def decompress_with_chunks(fpath, CHUNKSIZE=1024):
     data = zlib.decompressobj()
-    my_file = open(fpath, 'rb')
+    my_file = open(fpath, "rb")
     buf = my_file.read(CHUNKSIZE)
     while buf:
         decompressed_data = data.decompress(buf)
@@ -199,6 +205,8 @@ def decompress_with_chunks(fpath, CHUNKSIZE = 1024):
 
     decompressed_data += data.flush()
     return decompressed_data
+
+
 #######################################Common formats#################################################################
 class A:
     def __init__(self, l):
@@ -208,16 +216,18 @@ class A:
     def pop(self):
         return self.l.pop()
 
+
 def pickle_exmaple():
     a = A([x for x in range(121, 191)])
-    with open('./devops/output/a.pickle', 'wb') as fhw:
+    with open("./devops/output/a.pickle", "wb") as fhw:
         pickle.dump(a, fhw)
-    with open('./devops/output/a.pickle', 'rb') as fhr:
+    with open("./devops/output/a.pickle", "rb") as fhr:
         b = pickle.load(fhr)
     for x in b.l:
         print(x)
 
-def reverse_readline(path: str, buf_size=8192, split_char='\n', enc="utf-8"):
+
+def reverse_readline(path: str, buf_size=8192, split_char="\n", enc="utf-8"):
     """A generator that returns the lines of a file in reverse order"""
     ###Most of the time we work with insanly big files, seeking stuff from the end of the file
     if not os.path.isfile(path):
@@ -248,18 +258,19 @@ def reverse_readline(path: str, buf_size=8192, split_char='\n', enc="utf-8"):
         if segment is not None:
             yield segment
 
+
 ########################################################################################################################
-def unix_style_file_operations(path_glob:str, regExp_str:str, fn: Callable):
+def unix_style_file_operations(path_glob: str, regExp_str: str, fn: Callable):
     res = []
-    pattern=re.compile(regExp_str)
+    pattern = re.compile(regExp_str)
     for file in glob.glob(path_glob, recursive=True):
         if os.path.isfile(file):
             fname = os.path.realpath(file)
-            with io.open(file, encoding='utf-8', errors='replace') as log_f_handle:
+            with io.open(file, encoding="utf-8", errors="replace") as log_f_handle:
                 try:
                     for line in log_f_handle.readlines():
                         for m in pattern.finditer(line):
-                            d = (m.groupdict())
+                            d = m.groupdict()
                             if len(d.keys()) == 0:
                                 continue
                             else:
@@ -275,7 +286,7 @@ def unix_style_file_operations(path_glob:str, regExp_str:str, fn: Callable):
 
 def ex_pandas():
     import pandas as pd
-    
+
     df = pd.read_excel("./devops/input/1.xlsx")
     l = df.values.tolist()
 
@@ -289,10 +300,87 @@ def ex_pandas():
     print(avr)
     l.append(["Среднее значение", str(avr), ""])
     df = pd.DataFrame([l])
-    df.columns = ['col1', 'col2', 'col3', 'col4']
+    df.columns = ["col1", "col2", "col3", "col4"]
     df.to_excel("./devops/input/2.xls")
     df.to_json("./devops/input/2.json")
     df.to_html("./devops/input/2.html")
+
+
+###################################################JSON#################################################################
+def json_101():
+    data = [{"a": "A", "b": (2, 4), "c": 3.0}]
+    print("DATA   :", data)
+
+    data_string = json.dumps(data)
+    print("ENCODED:", data_string)
+
+    decoded = json.loads(data_string)
+    print("DECODED:", decoded)
+
+    print("ORIGINAL:", type(data[0]["b"]))
+    print("DECODED :", type(decoded[0]["b"]))
+
+    # тут выкосячивает лишний пробел, ибо не формат строка. мне уже лень чинить - устал.
+    print("PRETTY_PRINT:\n", json.dumps(data[0], sort_keys=True, indent=2))
+
+
+def json_and_dicts():
+    data = [{"a": "A", "b": (2, 4), "c": 3.0, ("d",): "D tuple"}]
+
+    print("First attempt")
+    try:
+        print(json.dumps(data))
+    except TypeError as err:
+        print("ERROR:", err)
+
+    print()
+    print("Second attempt")
+    print(json.dumps(data, skipkeys=True))
+
+
+class EncoderExample(json.JSONEncoder):
+    def default(self, obj):
+        print("default(", repr(obj), ")")
+        # Convert objects to a dictionary of their representation
+        d = {
+            "__class__": obj.__class__.__name__,
+            "__module__": obj.__module__,
+        }
+        d.update(obj.__dict__)
+        return d
+
+
+class ObjectToEncode:
+    def __init__(self, argdata, *args, **kwargs):
+        self.name = "Petr"
+        self.surname = "Morozov"
+        self.list_data = [x for x in range(1, 10)]
+        self.dict_data = dict.fromkeys([x for x in range(1, 10)], 1)
+        self.argdata = argdata
+        self.process_kwargs(args)
+
+    def __repr__(self):
+        return (
+            f" <ObjectToEncode> {self.surname=} {self.argdata=}\n"
+            f"{self.dict_data=}\n{self.list_data=}"
+        )
+
+    def process_kwargs(self, *args, **kwargs):
+        pass
+
+
+def encode_custom_object(obj):
+    encoder = EncoderExample()
+    # default принтит, паралельно с енкодом
+    print("Our obj __repr__")
+    encoded_json = encoder.encode(obj)
+    print("ENCODED:")
+    restored = json.loads(encoded_json)
+    print(json.dumps(restored, sort_keys=True, indent=2))
+    print(f"TYPES: {type(obj)} {type(encoded_json)} {type(restored)}")
+    # за декодеры объяснять не будем, потому что там таже проблема но в квадрате.
+    # т.е. без рефлекта не объяснишь как он работает. Ну и понимать наследование надо.
+
 
 if __name__ == "__main__":
     # print("Files")
@@ -308,23 +396,23 @@ if __name__ == "__main__":
     # С большими файлами так не прокатит:
     # res = small_files_routine()
     # print(res)
-    
+
     # file_handler_methods()
 
     # sizes_l = [1024, 67_108_864, 10_069_547_520]
     # for size_in_B in sizes_l:
     #     print(f"Converting {size_in_B}B to human readable: {bytes2human(size_in_B)}")
 
-    #In-to zlib
+    # In-to zlib
     # compresson101()
     # figure_out_compression_ratio()
     # figure_out_compression_ratio(fpath="./devops/input/log.log", lvl=None)
     # extract_2_file()
-    
+
     # pickle_exmaple()
-    
-    #Работа с огромными файлами, чаще всего имеет смысл с конца. Заодно на генератор посмотрим:
-    #Если вперед читать, идея таже токо там еще chunk_size вперед едет, и seek в конец нет.
+
+    # Работа с огромными файлами, чаще всего имеет смысл с конца. Заодно на генератор посмотрим:
+    # Если вперед читать, идея таже токо там еще chunk_size вперед едет, и seek в конец нет.
     # Эквивалент tail -n 10
     # gen = reverse_readline(fpath)
     # for i in range(10):
@@ -337,5 +425,5 @@ if __name__ == "__main__":
     # bonus1 unix style glob + re = super grep
     # За регэкспы объяснять отдельно. И это одна из тех штук где бесполезно объяснять можно токо взять.
     # unix_style_file_operations('./devops/*',r"^[ ]*(?P<import>(import |from ))(?P<package>[\w. ]*)", print)
-    
+
     ex_pandas()

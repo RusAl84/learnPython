@@ -30,3 +30,6 @@ class Config:
         print(
             f"\nLast run at {now.strftime('%X')} \tPair ends at {self.pair_end.strftime('%X')}\tMinutes left: {min_left}"
         )
+
+def print_secret_key():
+    print("print_secret_key")
