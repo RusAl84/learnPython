@@ -273,6 +273,26 @@ def unix_style_file_operations(path_glob:str, regExp_str:str, fn: Callable):
     return res
 
 
+def ex_pandas():
+    import pandas as pd
+    
+    df = pd.read_excel("./devops/input/1.xlsx")
+    l = df.values.tolist()
+
+    print(df)
+    # print(l[0][0])
+    avr = 0
+    for item in l:
+        avr += int(item[1])
+    avr /= len(l)
+    avr = int(avr)
+    print(avr)
+    l.append(["Среднее значение", str(avr), ""])
+    df = pd.DataFrame([l])
+    df.columns = ['col1', 'col2', 'col3', 'col4']
+    df.to_excel("./devops/input/2.xls")
+    df.to_json("./devops/input/2.json")
+    df.to_html("./devops/input/2.html")
 
 if __name__ == "__main__":
     # print("Files")
@@ -316,5 +336,6 @@ if __name__ == "__main__":
 
     # bonus1 unix style glob + re = super grep
     # За регэкспы объяснять отдельно. И это одна из тех штук где бесполезно объяснять можно токо взять.
-    unix_style_file_operations('./devops/*',r"^[ ]*(?P<import>(import |from ))(?P<package>[\w. ]*)", print)
+    # unix_style_file_operations('./devops/*',r"^[ ]*(?P<import>(import |from ))(?P<package>[\w. ]*)", print)
     
+    ex_pandas()
