@@ -1,11 +1,13 @@
 ﻿# Imports wich demonstrate how imports work
 # import this
 import os
+
 # from os import path
 # from os import path as pt
 # from os import *
 
 import random
+
 # from config import Config
 # from commonNS import CommonNS
 import inspect
@@ -166,6 +168,110 @@ def swatches_from_csv(fpath="./devops/input/color_web_safe.csv"):
         wfh.write(output)
 
 
+###################################################JSON#################################################################
+def json_101():
+    data = [{"a": "A", "b": (2, 4), "c": 3.0}]
+    print("DATA   :", data)
+
+    data_string = json.dumps(data)
+    print("ENCODED:", data_string)
+
+    decoded = json.loads(data_string)
+    print("DECODED:", decoded)
+
+    print("ORIGINAL:", type(data[0]["b"]))
+    print("DECODED :", type(decoded[0]["b"]))
+
+    # тут выкосячивает лишний пробел, ибо не формат строка. мне уже лень чинить - устал.
+    print("PRETTY_PRINT:\n", json.dumps(data[0], sort_keys=True, indent=2))
+
+
+def json_and_dicts():
+    data = [{"a": "A", "b": (2, 4), "c": 3.0, ("d",): "D tuple"}]
+
+    print("First attempt")
+    try:
+        print(json.dumps(data))
+    except TypeError as err:
+        print("ERROR:", err)
+
+    print()
+    print("Second attempt")
+    print(json.dumps(data, skipkeys=True))
+
+
+class EncoderExample(json.JSONEncoder):
+    def default(self, obj):
+        print("default(", repr(obj), ")")
+        # Convert objects to a dictionary of their representation
+        d = {
+            "__class__": obj.__class__.__name__,
+            "__module__": obj.__module__,
+        }
+        d.update(obj.__dict__)
+        return d
+
+
+class ObjectToEncode:
+    def __init__(self, argdata, *args, **kwargs):
+        self.name = "Petr"
+        self.surname = "Morozov"
+        self.list_data = [x for x in range(1, 10)]
+        self.dict_data = dict.fromkeys([x for x in range(1, 10)], 1)
+        self.argdata = argdata
+        self.process_kwargs(args)
+
+    def __repr__(self):
+        return (
+            f" <ObjectToEncode> {self.surname=} {self.argdata=}\n"
+            f"{self.dict_data=}\n{self.list_data=}"
+        )
+
+    def process_kwargs(self, *args, **kwargs):
+        pass
+
+
+def encode_custom_object(obj):
+    encoder = EncoderExample()
+    # default принтит, паралельно с енкодом
+    print("Our obj __repr__")
+    encoded_json = encoder.encode(obj)
+    print("ENCODED:")
+    restored = json.loads(encoded_json)
+    print(json.dumps(restored, sort_keys=True, indent=2))
+    print(f"TYPES: {type(obj)} {type(encoded_json)} {type(restored)}")
+    # за декодеры объяснять не будем, потому что там таже проблема но в квадрате.
+    # т.е. без рефлекта не объяснишь как он работает. Ну и понимать наследование надо.
+##############################################requests#####################################################################
+
+def vanilla_requests_101(url_str="https://ya.ru", path2data="./output/data.html"):
+    response = request.urlopen(url_str)
+    print('URL     :', response.geturl())
+    headers = response.info()
+    print('DATE    :', headers['date'])
+    print('HEADERS :')
+    print('---------')
+    print(headers)
+    data = response.read().decode('utf-8')
+    print('LENGTH  :', len(data))
+    ### в дате лежит тело. но мы упарываемся об капчу...
+    with open(path2data, 'wt') as wfh:
+        wfh.write(data)
+
+#Не заработает без токена и локал хоста...
+def request_with_query_2(url_str="'http://localhost:8080/'", query_args={'q': 'query string', 'foo': 'bar'}):
+    encoded_args = parse.urlencode(query_args).encode('utf-8')
+    print(request.urlopen(url, encoded_args).read().decode('utf-8'))
+
+def post_query_2(url_str="'http://localhost:8080/'", query_args={'q': 'query string', 'foo': 'bar'}):
+    r = request.Request(url=url_str, data=parse.urlencode(query_args).encode('utf-8'),)
+    r.add_header('User-agent','python-script',)
+    response = request.urlopen(r).read().decode('utf-8')
+
+def js_requests():
+    token = os.environ.get("GITHUB_TOKEN")
+
+
 if __name__ == "__main__":
     # cfg = Config("00:00")
     # cfg.print_status_time()
@@ -190,7 +296,7 @@ if __name__ == "__main__":
 
     ##########################################  CSV  ###################################################################
     # test_csv()
-    
+
     # minimal_csv_reader()
     # minimal_writer(verb=True)
 
@@ -198,3 +304,12 @@ if __name__ == "__main__":
     # dialect_next()
     # dict_style_csv()
     # swatches_from_csv()
+    ##########################################  JSON  ##################################################################
+    # json_101()
+    # json_and_dicts()
+    # someObj = ObjectToEncode("Some Data")
+    # encode_custom_object(someObj)
+    
+    ############################################  REQUESTS  #############################################################
+    vanilla_requests_101()
+
