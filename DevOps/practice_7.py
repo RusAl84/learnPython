@@ -156,6 +156,7 @@ def echo_client():
 
 if __name__ == "__main__":
     #########################################SUBPROCESS################################################################
+    # https://learn.microsoft.com/ru-ru/windows/wsl/basic-commands#set-default-linux-distribution
     # shell_less()
     # shell_and_suppres_err()
     # manual_piping()
@@ -168,4 +169,4 @@ if __name__ == "__main__":
     ############################################SOCKET##################################################################
     # get_port_by_server_name()
     # look_up_ports()
-    echo_client()
+    # echo_client()
