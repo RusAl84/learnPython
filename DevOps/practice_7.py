@@ -52,7 +52,7 @@ def connecting_commands():
     print('Manual chain...:')
 
     cat = subprocess.Popen(
-        ['cat', 'p6_Modules.py'],
+        ['cat', 'practice_6.py'],
         stdout=subprocess.PIPE,
     )
 
@@ -159,13 +159,13 @@ if __name__ == "__main__":
     # shell_less()
     # shell_and_suppres_err()
     # manual_piping()
-    # connecting_commands()
-    pid = os.getpid()
-    communicate(pid)
+    # # connecting_commands()
+    # pid = os.getpid()
+    # communicate(pid)
 
-    #pool_context()
+    # pool_context()
 
     ############################################SOCKET##################################################################
-    #get_port_by_server_name()
-    #look_up_ports()
-    # echo_client()
+    # get_port_by_server_name()
+    # look_up_ports()
+    echo_client()
