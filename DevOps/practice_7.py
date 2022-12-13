@@ -160,7 +160,7 @@ if __name__ == "__main__":
     # shell_less()
     # shell_and_suppres_err()
     # manual_piping()
-    # # connecting_commands()
+    # connecting_commands()
     # pid = os.getpid()
     # communicate(pid)
 
@@ -169,4 +169,4 @@ if __name__ == "__main__":
     ############################################SOCKET##################################################################
     # get_port_by_server_name()
     # look_up_ports()
-    # echo_client()
+    echo_client()

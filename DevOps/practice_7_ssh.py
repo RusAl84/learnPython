@@ -16,7 +16,7 @@ print("Connected")
 time.sleep(1)
 
 commands = ["ls -al", "ls -alh"]
-command = "df -h"
+command = "python3 app.py"
 time.sleep(1)
 # If you have only one command, you have to use it.
 print("Executing {$",command,"}")
@@ -25,12 +25,12 @@ print(stdout.readlines())
 print("===== Errors ======")
 print(stderr.readlines())
 time.sleep(1)
-# If you will use commnad more then one of them, you have to use it.
-for command in commands:
-	print("Executing {$", f"{command}", "}")
-	stdin , stdout, stderr = con.exec_command(command)
-	print(stdout.read())
-	print("===== Errors ======")
-	print(stderr.read())
+# # If you will use commnad more then one of them, you have to use it.
+# for command in commands:
+# 	print("Executing {$", f"{command}", "}")
+# 	stdin , stdout, stderr = con.exec_command(command)
+# 	print(stdout.read())
+# 	print("===== Errors ======")
+# 	print(stderr.read())
 
 con.close()
