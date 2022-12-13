@@ -33,3 +33,4 @@ class Config:
 
 def print_secret_key():
     print("print_secret_key")
+    print(f"Hello, from {__name__}!")

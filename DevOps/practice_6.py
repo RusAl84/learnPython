@@ -1,15 +1,14 @@
 ﻿# Imports wich demonstrate how imports work
 # import this
-import os
+from config import *
+from commonNS import CommonNS
 
+import os
 # from os import path
 # from os import path as pt
 # from os import *
 
 import random
-
-# from config import Config
-# from commonNS import CommonNS
 import inspect
 import string
 import csv
@@ -28,13 +27,13 @@ def test_csv():
     ]
 
     # Write CSV file
-    with open("test.csv", "wt") as fp:
+    with open("./devops/input/test.csv", "wt", newline="") as fp:
         writer = csv.writer(fp, delimiter=",")
         # writer.writerow(["your", "header", "foo"])  # write header
         writer.writerows(data)
 
     # Read CSV file
-    with open("test.csv") as fp:
+    with open("./devops/input/test.csv") as fp:
         reader = csv.reader(fp, delimiter=",", quotechar='"')
         # next(reader, None)  # skip the headers
         data_read = [row for row in reader]
@@ -220,16 +219,13 @@ class ObjectToEncode:
         self.dict_data = dict.fromkeys([x for x in range(1, 10)], 1)
         self.argdata = argdata
         self.process_kwargs(args)
-
     def __repr__(self):
         return (
             f" <ObjectToEncode> {self.surname=} {self.argdata=}\n"
             f"{self.dict_data=}\n{self.list_data=}"
         )
-
     def process_kwargs(self, *args, **kwargs):
         pass
-
 
 def encode_custom_object(obj):
     encoder = EncoderExample()
@@ -273,8 +269,8 @@ def js_requests():
 
 
 if __name__ == "__main__":
-    # cfg = Config("00:00")
-    # cfg.print_status_time()
+    cfg = Config("00:00")
+    cfg.print_status_time()
     # print_secret_key()
     # print(f"Hello, from {__name__}!")
 
@@ -307,9 +303,8 @@ if __name__ == "__main__":
     ##########################################  JSON  ##################################################################
     # json_101()
     # json_and_dicts()
-    # someObj = ObjectToEncode("Some Data")
-    # encode_custom_object(someObj)
+    someObj = ObjectToEncode("Some Data")
+    encode_custom_object(someObj)
     
     ############################################  REQUESTS  #############################################################
-    vanilla_requests_101()
-
+    # vanilla_requests_101()
