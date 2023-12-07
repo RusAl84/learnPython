@@ -20,6 +20,7 @@ def status():
 @app.route("/send", methods=['POST'])
 def send():
     msg = request.json
+    print(msg)
     ListOfMessages.append(msg)
     return f"Сообщение отослано успешно. Всего сообщений: {len(ListOfMessages)} ", 200
 
