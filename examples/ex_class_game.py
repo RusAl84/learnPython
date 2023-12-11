@@ -335,7 +335,7 @@ if __name__ == "__main__":
     sound = Sounds()
     sound.playSound()
     mihalich = Unit("МИХАЛЫЧ", 100)
-    evgen = Unit("ГЛЕБ", 92)
+    evgen = Unit("ГЛЕБ", 94)
     boss = Boss("ЕГЭ")
 
     while mihalich.isLive() and evgen.isLive() and boss.isLive():

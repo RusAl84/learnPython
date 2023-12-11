@@ -24,7 +24,6 @@ def send():
     ListOfMessages.append(msg)
     return f"Сообщение отослано успешно. Всего сообщений: {len(ListOfMessages)} ", 200
 
-
 # получение сообщений
 @app.route("/get/<int:id>")
 def get(id):
@@ -35,12 +34,21 @@ def get(id):
 def getd(id):
     return f"Иван не съел {id} ёжиков", 200
 
+def BERT_Summarizer(text):
+    # https://github.com/dmmiller612/bert-extractive-summarizer
+    # pip install bert-extractive-summarizer
+    # pip install ...etc
+    from summarizer import Summarizer
+    model = Summarizer()
+    result = model(text, num_sentences=3)
+    return result
+
 # отправка сообщений
-@app.route("/vanya", methods=['POST'])
-def vanya():
+@app.route("/sum", methods=['POST'])
+def summi():
     msg = request.json
     text = msg['text']
-    return f"{text[::-1]}", 200
+    return f"{BERT_Summarizer(text)}", 200
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0')

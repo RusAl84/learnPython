@@ -1,10 +1,10 @@
-import datetime
+# import datetime
 import requests
-import json
+# import json
 
 
 ServerAdress = "http://localhost:5000"
-msg={"privet": "ServerAdress"}
+msg={"FILATOV PLACHET": "NE BERET"}
 
 url = ServerAdress + "/send"
 # data = json.loads(msg)  
